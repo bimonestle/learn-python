@@ -5,11 +5,12 @@ def calcNumb():
         number = input("Enter a number: ")
         if number == "done":
             break
-        number = float(number)
-        total += number
-        count += 1
+        try:
+            number = float(number)
+            total += number
+            count += 1
+        except:
+            print("Invalid input")
     print("Total: ", total, "Count: ", count, "Average: ", total/count)
-try:
-    calcNumb()
-except:
-    print("Invalid input")
+
+calcNumb()
