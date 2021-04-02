@@ -1,36 +1,22 @@
-def maxMinNumb():
-    total = 0
-    smallest = None
-    largest = None
+smallest = None
+largest = None
 
-    print("Smallest before: ", smallest)
-    print("Largest before: ", largest)
-    
-    numbers = input("Enter a list of numbers separated by space: ")
-    listNumb = numbers.split()
+print("Smallest before: ", smallest)
+print("Largest before: ", largest)
 
-    print(listNumb)
+numbers = input("Enter a list of numbers separated by space: ")
+listNumb = numbers.split()
 
-    maxNumber = maxNumb(listNumb)
-    minNumber = minNumb(listNumb)
-    print("Max number is: ", maxNumber, ", Min number is: ", minNumber)
+print(listNumb)
 
-def maxNumb(numbers):
-    largest = None
-    for number in numbers:
-        number = int(number)
-        if largest is None or number  > largest:
-            largest = number
-        print("Loop: ", number, largest)
-    return largest
+for number in listNumb:
+    number = int(number)
+    if largest is None or number > largest:
+        largest = number
+    print("Loop largest: ", number, largest)
 
-def minNumb(numbers):
-    smallest = None
-    for number in numbers:
-        number = int(number)
-        if smallest is None or int(number) < smallest:
-            smallest = number
-        print("Loop: ", number, smallest)
-    return smallest
+    if smallest is None or number < smallest:
+        smallest = number
+    print("Loop smallest: ", number, smallest)
 
-maxMinNumb()
+print("Max number is: ", largest, ", Min number is: ", smallest)
