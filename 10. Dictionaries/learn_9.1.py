@@ -16,6 +16,6 @@ for line in fHand:
             counts[word] += 1
 
         # using get() to achieve the same result
-        counts[word] = counts.get(word, 0) + 1
+        # counts[word] = counts.get(word, 0) + 1
 
 print(counts)
