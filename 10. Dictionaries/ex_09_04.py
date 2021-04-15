@@ -31,6 +31,7 @@ for line in fHand:
         # The more succinct alternative
         senders[words[1]] = senders.get(words[1], 0) + 1
 
+# Find the senders who has the most messages
 mostMsg = max(senders.values())
 for key in senders:
     if senders[key] == mostMsg:
