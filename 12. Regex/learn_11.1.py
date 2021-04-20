@@ -11,6 +11,7 @@ except:
 for line in fHand:
     line = line.rstrip()
 
+    # Search for lines that contain "From:"
     if re.search("From:", line):
         print(line)
 
