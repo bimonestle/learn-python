@@ -1,5 +1,4 @@
-# import urllib.request
-import urllib
+import urllib.request
 
 # Once the web page has been opened with 'urllib.urlopen',
 # we can treat it like a file and read through it using a 'for' loop.
