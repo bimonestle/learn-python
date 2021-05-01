@@ -9,6 +9,7 @@ img = urllib.request.urlopen("http://data.pr4e.org/cover3.jpg").read()
 # then writes the data out to your disk.
 # the 'wb' argument for open(), opens a binary file for writing only.
 fHand = open("cover3.jpg", "wb")
+# print(img)
 fHand.write(img)
 fHand.close()
 
