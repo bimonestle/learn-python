@@ -5,8 +5,14 @@
 # where the user enters an improperly formatted or non-existent URL.
 
 import socket
+import re
 
 url = input("Enter url: ")
+# try:
+#     url = re.findall('href="(http[s]?://.*?)')
+# except:
+#     print("You entered an invalid url")
+#     exit()
 # print(url.split("/"))
 urlSplit = url.split("/")
 mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
