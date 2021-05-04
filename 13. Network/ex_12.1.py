@@ -5,7 +5,6 @@
 # where the user enters an improperly formatted or non-existent URL.
 
 import socket
-import re
 
 # http://data.pr4e.org/romeo.txt
 url = input("Enter url: ")
