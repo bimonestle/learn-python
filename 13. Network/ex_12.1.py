@@ -7,21 +7,21 @@
 import socket
 import re
 
+# http://data.pr4e.org/romeo.txt
 url = input("Enter url: ")
+
 try:
-    url = re.findall('href="(http[s]?://.*?)')
+    urlSplit = url.split("/")
+    mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    hostname = urlSplit[2]
+    mySock.connect((hostname, 80))
 except:
-    print("You entered an invalid url")
+    print(url, "is an invalid url")
     exit()
-# print(url.split("/"))
-urlSplit = url.split("/")
-mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-mySock.connect((urlSplit[2], 80))
+
 cmd = "GET " + url + " HTTP/1.0\r\n\r\n"
 cmd = cmd.encode()
-
 mySock.send(cmd)
-
 while True:
     data = mySock.recv(520)
     if len(data) < 1:
