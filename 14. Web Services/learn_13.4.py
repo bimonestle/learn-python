@@ -3,7 +3,7 @@ import json
 import ssl
 
 api_key = False
-api_key = input("Your API Key: ")
+api_key = 'AIzaSyAOlnA9TVUGJ5CAgzFCu23kKTftyKJElGk'
 
 if api_key is False:
     api_key = 42
