@@ -13,6 +13,12 @@ conn = sqlite3.connect('music.sqlite')
 # to calling open() when dealing with text files.
 # Or in a nutshell it's like a gateway to a collection of CLI
 # of database commands (SQL).
+
+# The 4 main cursors are 
+# execute()
+# fetchone()
+# fetchall()
+# close()
 cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS Tracks')
