@@ -12,7 +12,7 @@ conn = sqlite3.connect('music.sqlite')
 # on the data stored in the database. Calling cursor() is similar conceptually
 # to calling open() when dealing with text files.
 # Or in a nutshell it's like a gateway to a collection of CLI
-# of database commands.
+# of database commands (SQL).
 cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS Tracks')
