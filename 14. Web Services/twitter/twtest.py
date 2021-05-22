@@ -3,7 +3,7 @@ from twurl import augment
 import ssl
 
 print('* Calling Twitter...')
-url = augment('https://api.twitter.com/1.1/statuses/user_timeline.json', {'screen_name': 'drchuck', 'count': '2'})
+url = augment('https://api.twitter.com/1.1/statuses/user_timeline.json', {'screen_name': 'FoodInsider', 'count': '2'})
 
 print(url)
 
@@ -16,5 +16,6 @@ connection = urllib.request.urlopen(url, context=ctx)
 data = connection.read()
 print(data)
 
+print('==============================')
 headers = dict(connection.getheaders())
 print(headers)
