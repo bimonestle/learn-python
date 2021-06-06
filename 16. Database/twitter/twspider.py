@@ -1,3 +1,25 @@
+# One of the problems of any kind of spidering program is that it needs to be able
+# to be stopped and restarted many times and you don't want to lose the data that
+# you have retrieved so far. You don't want to always restart your data retrieval
+# at the very beginning so we want to store data as we retrieve it so our program
+# can start back up and pick up where it left off.
+
+# We will start by retrieving one person's Twitter friends and their statuses,
+# looping through the list of friends, and adding each of the friends
+# to a database to be retrieved in the future.
+
+# After we process one person's Twitter friends, we check in our database
+# and retrieve one of the the friends of the friend. We do this over and over,
+# picking an 'unvisited' person, retrieving their friend list,
+# and adding friends we have not seen to our list for a future visit.
+
+# We also track how many times we have seen a particular friend in the database
+# to get some sense of their popularity.
+
+# By storing our list of known accounts and whether we have retrieved the account
+# or not, and how popular the account is in a database on the disk of the computer,
+# we can stop and restart our program as many times as we like.
+
 from urllib.request import urlopen
 import urllib.error
 import twurl
