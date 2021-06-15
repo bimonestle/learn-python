@@ -39,6 +39,10 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 while True:
+    # When we prompt the user for a Twitter account, if the account exists,
+    # we must look up its 'id' value. If the account doesn't yet exist
+    # in the database ('People' table), we must insert the record and get the
+    # 'id' value from the inserted row
     account = input('Enter a Twitter Account or quit: ')
     if account == 'quit':
         break
@@ -98,13 +102,40 @@ while True:
 
     countNew = 0
     countOld = 0
+
+    # This is a very common pattern and is done twice in the program above.
+    # This code shows how we look up the 'id' for a friend's account
+    # when we have extracted 'screen_name' from a 'user' node
+    # in the retrieved Twitter JSON.
+
     for u in js['users']:
         friend = u['screen_name']
         print(friend)
+        # Since overtime it will be increasingly likely that the account will aready be
+        # in the database, we first check to see if the 'People' record exists using
+        # a 'SELECT' statement.
         cur.execute('SELECT id FROM People WHERE name = ? LIMIT 1', (friend,))
+
+        # If all goes well inside the 'try' section, we retrieve the record using
+        # 'fetchone()' and then retrieve the first (and only) element of the
+        # returned tuple and store it 'friend_id'.
         try:
             friend_id = cur.fetchone()[0]
             countOld += 1
+        
+        # If the 'SELECT' fails, the 'fetchone()[0]' code will fail and
+        # control will transfer into 'except' section.
+        
+        # If we end up in the 'except' code, it simply means that the row
+        # was not found, so we must insert the row.
+        # We use 'INSERT OR IGNORE' just to avoid errors and then call 'commit()'
+        # to force the database to really be updated.
+        # After the write is done, we can check the 'cur.rowcount' to see
+        # how many rows were afected. Since we are attempting to insert a single row,
+        # if the number of affected rows is something other than 1, it's an error.
+
+        # If the 'INSERT' is successful, we can look at cur.lastrowid to find out
+        # what value the database assigned to the 'id' column in our newly created row.
         except:
             cur.execute('''INSERT OR IGNORE INTO People (name, retrieved) VALUES (?, 0)''', (friend,))
             conn.commit()
