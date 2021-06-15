@@ -24,7 +24,13 @@ TWITTER_URL = "https://api.twitter.com/1.1/friends/list.json"
 conn = sqlite3.connect('friends.sqlite')
 cur = conn.cursor()
 
+# We indicate the 'name' column in the 'People' table must be 'UNIQUE'.
 cur.execute('''CREATE TABLE IF NOT EXISTS People (id INTEGER PRIMARY KEY, name TEXT UNIQUE, retrieved INTEGER)''')
+
+# We also indicate that the combination of the two numbers in each row
+# of the 'Follows' table must be unique. These constraints keep us from
+# making the same mistakes such as adding the same relationship
+# more than once.
 cur.execute('''CREATE TABLE IF NOT EXISTS Follows (from_id INTEGER, to_id INTEGER, UNIQUE(from_id, to_id))''')
 
 # ignore SSL certificate errors
@@ -48,6 +54,11 @@ while True:
         try:
             id = cur.fetchone()[0]
         except:
+            # We add the 'OR IGNORE' clause into our 'INSERT' statement to indicate that
+            # if this particular 'INSERT' would cause a violation of the 'name must be unique' rule,
+            # the database system is allowed to ignore the 'INSERT'.
+            # We are using the database constraint as a safety net to make sure
+            # we don't inadvertently do something incorrect.
             cur.execute('''INSERT OR IGNORE INTO People (name, retrieved) VALUES (?, 0)''', (account,))
             conn.commit()
             if cur.rowcount != 1:
@@ -102,6 +113,9 @@ while True:
                 continue
             friend_id = cur.lastrowid
             countNew += 1
+        
+        # We simply tell the database to ignore our attempted 'INSERT',
+        # if it would violate the uniqueness constraint that we specified for the 'Follows' rows.
         cur.execute('''INSERT OR IGNORE INTO Follows (from_id, to_id) VALUES (?, ?)''', (id, friend_id))
         print('New Accounts=', countNew, 'revisited=', countOld)
         print('Remaining', headers['x-rate-limit-remaining'])
