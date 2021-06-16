@@ -47,14 +47,14 @@ while True:
     if account == 'quit':
         break
     if len(account) < 1:
-        cur.execute('SELECT id, name FROM People where retrieved = 0 LIMIT = 1')
+        cur.execute('SELECT id, name FROM People where retrieved = 0 LIMIT 1')
         try:
             (id, account) = cur.fetchone()
         except:
             print('No unretrieved Twitter accounts found')
             continue
     else:
-        cur.execute('SELECT id FROM People WHERE name = ? LIMIT = 1', (account,))
+        cur.execute('SELECT id FROM People WHERE name = ? LIMIT 1', (account,))
         try:
             id = cur.fetchone()[0]
         except:
