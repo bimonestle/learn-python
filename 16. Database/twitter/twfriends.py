@@ -151,4 +151,4 @@ while True:
         print('New Accounts=', countNew, 'revisited=', countOld)
         print('Remaining', headers['x-rate-limit-remaining'])
         conn.commit()
-    cur.close()
+cur.close()
