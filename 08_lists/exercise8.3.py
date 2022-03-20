@@ -9,7 +9,6 @@ except:
     print("Cannot open file name %s" % fname)
     quit()
 
-count = 0
 for line in fhand:
     words = line.split()
     # print('Debug:', words)
