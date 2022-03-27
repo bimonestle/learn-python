@@ -15,7 +15,12 @@ for line in fHand:
     line = line.strip()
     words = line.split()
     for word in words:
-        key_word[word] = "n/a"
-        print("Is %s in key_word? %s" % (word, word in key_word))
 
-print(key_word)
+        # Immediately skip the duplicate words
+        if not word in key_word:
+            key_word[word] = "n/a"
+        else:
+            print("%s is already in the dictionary" % word)
+            continue
+
+# print(key_word)
