@@ -17,10 +17,10 @@ for line in fHand:
     for word in words:
 
         # Immediately skip the duplicate words
-        if not word in key_word:
+        if word not in key_word:
             key_word[word] = "n/a"
         else:
             print("%s is already in the dictionary" % word)
             continue
 
-# print(key_word)
+print(key_word)
